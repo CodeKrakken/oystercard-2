@@ -9,4 +9,8 @@ class Journey
     PENALTY_FARE
   end
 
+  def finish(station)
+    self
+  end
+
 end

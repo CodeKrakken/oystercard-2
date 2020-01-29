@@ -11,7 +11,7 @@ describe Journey do
     expect(subject.fare).to eq Journey::PENALTY_FARE
   end
 
-  xit 'returns itself when exiting a journey' do
+  it 'returns itself when exiting a journey' do
     expect(subject.finish(station)).to eq(subject)
   end
 
