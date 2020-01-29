@@ -1,6 +1,7 @@
 require 'oystercard'
 
 describe Oystercard do
+  context 'Initialized' do
 
   let(:entry_station){ double :entry_station }
   let(:exit_station){ double :exit_station }
@@ -21,7 +22,7 @@ describe Oystercard do
     expect{ subject.touch_in(entry_station) }.to raise_error "Insufficient funds to touch in"
   end
 
-  context 'funds on card' do
+  context 'Topped up' do
 
     before :each do
       subject.top_up(Oystercard::MAXIMUM_BALANCE-10)
@@ -35,7 +36,7 @@ describe Oystercard do
       expect { subject.top_up 11 }.to raise_error "Maximum balance of #{Oystercard::MAXIMUM_BALANCE} exceeded"
     end
 
-    context 'on journey' do
+    context 'Touched in successfully' do
 
       before :each do
         subject.touch_in(entry_station)
@@ -69,4 +70,5 @@ describe Oystercard do
       end
     end
   end
+end
 end

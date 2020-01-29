@@ -1,3 +1,5 @@
+require_relative 'station'
+
 class Oystercard
 
   MAXIMUM_BALANCE = 90
@@ -5,7 +7,6 @@ class Oystercard
 
   attr_reader :balance
   attr_reader :entry_station
-  attr_reader :exit_station
   attr_reader :journeys
 
   def initialize
