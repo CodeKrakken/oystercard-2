@@ -26,25 +26,25 @@ describe Oystercard do
     it 'raises an error if the maximum balance is exceeded' do
       expect { subject.top_up 11 }.to raise_error "Maximum balance of #{Oystercard::MAXIMUM_BALANCE} exceeded"
     end
+
+    context 'on journey' do
+
+      before :each do
+        subject.touch_in
+      end
   
-    it 'can deduct a fare' do
-      expect { subject.deduct 5}.to change{ subject.balance }.by -5
-    end
+      it 'can touch in' do
+        expect(subject).to be_in_journey
+      end
 
-    it 'can touch in' do
-      subject.touch_in
-      expect(subject).to be_in_journey
-    end
+      it 'can touch out' do
+        subject.touch_out
+        expect(subject).not_to be_in_journey
+      end
 
-    it 'can touch out' do
-      subject.touch_in
-      subject.touch_out
-      expect(subject).not_to be_in_journey
-    end
-
-    it 'deducts the minimum fare on touch out' do
-      subject.touch_in
-      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
+      it 'deducts the minimum fare on touch out' do
+        expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
+      end
     end
   end
 end
