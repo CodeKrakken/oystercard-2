@@ -6,9 +6,11 @@ class Oystercard
   attr_reader :balance
   attr_reader :entry_station
   attr_reader :exit_station
+  attr_reader :journeys
 
   def initialize
     @balance = 0
+    @journeys = {}
   end
 
   def top_up(amount)

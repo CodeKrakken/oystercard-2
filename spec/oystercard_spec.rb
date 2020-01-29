@@ -13,6 +13,10 @@ describe Oystercard do
     expect(subject).not_to be_in_journey
   end
 
+  it 'has an empty list of journeys by default' do
+    expect(subject.journeys).to be_empty
+  end
+
   it 'will not touch in if insufficient funds' do
     expect{ subject.touch_in(entry_station) }.to raise_error "Insufficient funds to touch in"
   end
