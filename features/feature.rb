@@ -1,6 +1,6 @@
 require './lib/oystercard.rb'
 oystercard = Oystercard.new
-station = Station.new
+station = Station.new("Brockley", 2)
 oystercard
 station
 oystercard.touch_in(station)
