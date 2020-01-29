@@ -23,10 +23,6 @@ describe Journey do
       expect(subject.entry_station).to eq station
     end
 
-    xit 'returns a penalty fare if no exit station given' do
-      expect(subject.fare).to eq Journey::PENALTY_FARE
-    end
-
     context 'given an entry station' do
       let(:other_station) { double :other_station }
 
