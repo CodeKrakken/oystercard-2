@@ -29,4 +29,13 @@ describe Oystercard do
       expect { subject.deduct 5}.to change{ subject.balance }.by -5
     end
   end
+
+  describe '#touch_in' do
+
+    it 'can touch in' do
+      subject.touch_in
+      expect(subject).to be_in_journey
+    end
+  end
+
 end
