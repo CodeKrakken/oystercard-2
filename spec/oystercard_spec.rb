@@ -1,6 +1,9 @@
 require 'oystercard'
 
 describe Oystercard do
+
+  let(:station) { double :station }
+
   it 'has a balance of zero' do
     expect(subject.balance).to eq(0)
   end
@@ -10,7 +13,7 @@ describe Oystercard do
   end
 
   it 'will not touch in if insufficient funds' do
-    expect{ subject.touch_in }.to raise_error "Insufficient funds to touch in"
+    expect{ subject.touch_in(station) }.to raise_error "Insufficient funds to touch in"
   end
 
   context 'funds on card' do
@@ -30,11 +33,15 @@ describe Oystercard do
     context 'on journey' do
 
       before :each do
-        subject.touch_in
+        subject.touch_in(station)
       end
   
       it 'can touch in' do
         expect(subject).to be_in_journey
+      end
+
+      it 'stores the entry station' do
+        expect(subject.entry_station).to eq station
       end
 
       it 'can touch out' do
