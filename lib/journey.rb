@@ -1,6 +1,12 @@
 class Journey
 
+  attr_reader :entry_station
+
   PENALTY_FARE = 6
+
+  def initialize(station)
+    @entry_station = station
+  end
 
   def complete?
   end
