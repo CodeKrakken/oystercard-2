@@ -9,23 +9,21 @@ describe Oystercard do
     expect(subject).not_to be_in_journey
   end
 
-  describe '#top_up' do
+  describe '#top_up and #deduct' do
 
     it 'can top up the balance' do
       expect { subject.top_up 1}.to change { subject.balance }.by 1
     end
 
-    it 'raises an error if the maximum balance is exceeded' do
-      maximum_balance = Oystercard::MAXIMUM_BALANCE
-      subject.top_up(maximum_balance)
-      expect { subject.top_up 1 }.to raise_error "Maximum balance of #{maximum_balance} exceeded"
+    before :each do
+      subject.top_up(Oystercard::MAXIMUM_BALANCE-10)
     end
-  end
 
-  describe 'deduct' do
-
+    it 'raises an error if the maximum balance is exceeded' do
+      expect { subject.top_up 11 }.to raise_error "Maximum balance of #{Oystercard::MAXIMUM_BALANCE} exceeded"
+    end
+  
     it 'can deduct a fare' do
-      subject.top_up(20)
       expect { subject.deduct 5}.to change{ subject.balance }.by -5
     end
   end
