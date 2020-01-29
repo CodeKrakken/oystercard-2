@@ -9,14 +9,18 @@ describe Oystercard do
     expect(subject).not_to be_in_journey
   end
 
-  describe '#top_up and #deduct' do
+  it 'will not touch in if insufficient funds' do
+    expect{ subject.touch_in }.to raise_error "Insufficient funds to touch in"
+  end
 
-    it 'can top up the balance' do
-      expect { subject.top_up 1}.to change { subject.balance }.by 1
-    end
+  context 'funds on card' do
 
     before :each do
       subject.top_up(Oystercard::MAXIMUM_BALANCE-10)
+    end
+
+    it 'can top up the balance' do
+      expect { subject.top_up 1}.to change { subject.balance }.by 1
     end
 
     it 'raises an error if the maximum balance is exceeded' do
@@ -26,17 +30,11 @@ describe Oystercard do
     it 'can deduct a fare' do
       expect { subject.deduct 5}.to change{ subject.balance }.by -5
     end
-  end
-
-  describe '#touch_in' do
 
     it 'can touch in' do
       subject.touch_in
       expect(subject).to be_in_journey
     end
-  end
-
-  describe '#touch_out' do
 
     it 'can touch out' do
       subject.touch_in
