@@ -28,17 +28,18 @@ describe Oystercard do
     end
   end
 
-  describe '#touch_in and #touch_out' do
-
-  before :each do
-    subject.touch_in
-  end
+  describe '#touch_in' do
 
     it 'can touch in' do
+      subject.touch_in
       expect(subject).to be_in_journey
     end
+  end
+
+  describe '#touch_out' do
 
     it 'can touch out' do
+      subject.touch_in
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
