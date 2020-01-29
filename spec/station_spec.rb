@@ -8,4 +8,8 @@ describe Station do
     expect(subject.name).to eq('Brockley')
   end
 
+  it 'knows its zone' do
+    expect(subject.zone).to eq(2)
+  end
+
 end
