@@ -10,10 +10,6 @@ describe Oystercard do
     expect(subject.balance).to eq(0)
   end
 
-  it 'is initially not in a journey' do
-    expect(subject).not_to be_in_journey
-  end
-
   it 'has an empty list of journeys by default' do
     expect(subject.journeys).to be_empty
   end
@@ -42,10 +38,6 @@ describe Oystercard do
         subject.touch_in(entry_station)
       end
   
-      it 'can touch in' do
-        expect(subject).to be_in_journey
-      end
-
       it 'stores the entry station' do
         expect(subject.entry_station).to eq entry_station
       end
@@ -58,10 +50,6 @@ describe Oystercard do
 
         before :each do
           subject.touch_out(exit_station)
-        end
-
-        it 'can touch out' do
-          expect(subject).not_to be_in_journey
         end
 
         it 'stores a journey' do
