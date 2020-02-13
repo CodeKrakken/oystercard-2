@@ -2,7 +2,6 @@ require 'journey_log'
 
 describe JourneyLog do
   let(:station) { double (:station) }
-  let(:journey) { double (:journey) }
 
   it 'has an empty list of journeys by default' do
     expect(subject.journeys).to be_empty
