@@ -22,5 +22,10 @@ describe JourneyLog do
     it 'finishes a journey' do
       expect(subject.finish(station)).to eq station
     end
+
+    it 'stores the finish station' do
+      subject.finish(station)
+      expect(subject.finish_station).to eq station
+    end
   end
 end

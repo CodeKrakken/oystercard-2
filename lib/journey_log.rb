@@ -17,4 +17,8 @@ class JourneyLog
     @entry_station
   end
 
+  def finish_station
+    @finish_station
+  end
+
 end
