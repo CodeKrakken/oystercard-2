@@ -1,7 +1,10 @@
 require 'journey_log'
+require 'journey'
 
 describe JourneyLog do
   let(:station) { double (:station) }
+  journey_class = Journey.new(:station)
+  subject(:journey_log) { described_class.new(journey_class) }
 
   it 'has an empty list of journeys by default' do
     expect(subject.journeys).to be_empty
