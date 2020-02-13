@@ -33,10 +33,6 @@ describe Oystercard do
       before :each do
         subject.touch_in(entry_station)
       end
-  
-      it 'stores the entry station' do
-        expect(subject.entry_station).to eq entry_station
-      end
 
       it 'deducts the minimum fare on touch out' do
         expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
@@ -46,10 +42,6 @@ describe Oystercard do
 
         before :each do
           subject.touch_out(exit_station)
-        end
-
-        it 'stores a journey' do
-          expect(subject.journeys[entry_station]).to eq exit_station
         end
       end
     end
