@@ -1,7 +1,15 @@
 class JourneyLog
 
   def start(station)
-    station
+    @entry_station = station
+  end
+
+  def finish(station)
+    @finish_station = station
+  end
+
+  def entry_station
+    @entry_station
   end
 
 end
