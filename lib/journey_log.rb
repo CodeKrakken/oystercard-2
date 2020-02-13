@@ -2,11 +2,12 @@ class JourneyLog
   attr_reader :journeys
 
   def initialize
-    @journeys = {}
+    @journeys = []
   end
 
   def start(station)
-    @entry_station = station
+    @journey = Journey.new(station)
+    @journey.entry_station
   end
 
   def finish(station)
@@ -14,7 +15,7 @@ class JourneyLog
   end
 
   def entry_station
-    @entry_station
+    @journey.entry_station
   end
 
   def finish_station
