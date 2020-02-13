@@ -24,7 +24,9 @@ class JourneyLog
   end
 
   def retrieve
-    @journeys.dup
+    @journeys.dup.each do |journey|
+      return journey
+    end
   end
 
 end
