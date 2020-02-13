@@ -13,7 +13,7 @@ class JourneyLog
   def finish(station)
     @journey = Journey.new unless @journey
     @journey.finish(station)
-    station
+    @journeys.push(@journey)
   end
 
   def entry_station
@@ -22,6 +22,10 @@ class JourneyLog
 
   def finish_station
     @journey.exit_station
+  end
+
+  def retrieve
+    @journeys.dup
   end
 
 end

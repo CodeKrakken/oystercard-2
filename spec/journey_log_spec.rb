@@ -2,6 +2,7 @@ require 'journey_log'
 
 describe JourneyLog do
   let(:station) { double (:station) }
+  let(:journey) { double (:journey) }
 
   it 'has an empty list of journeys by default' do
     expect(subject.journeys).to be_empty
@@ -19,13 +20,14 @@ describe JourneyLog do
   end
 
   describe '#finish' do
-    it 'finishes a journey' do
-      expect(subject.finish(station)).to eq station
-    end
-
     it 'stores the finish station' do
       subject.finish(station)
       expect(subject.finish_station).to eq station
+    end
+
+    it 'stores the journey' do
+      subject.finish(station)
+      expect(subject.journeys[-1]).to be_a(Journey)
     end
   end
 end
