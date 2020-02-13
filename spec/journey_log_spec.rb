@@ -30,4 +30,10 @@ describe JourneyLog do
       expect(subject.journeys[-1]).to be_a(Journey)
     end
   end
+
+  describe '#retrieve' do
+    it 'returns a list of journeys' do
+      expect(subject.retrieve).to be_an(Array)
+    end
+  end
 end
