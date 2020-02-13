@@ -37,13 +37,6 @@ describe Oystercard do
       it 'deducts the minimum fare on touch out' do
         expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
       end
-
-      context 'Completed journey' do
-
-        before :each do
-          subject.touch_out(exit_station)
-        end
-      end
     end
   end
 end
