@@ -3,6 +3,10 @@ require 'journey_log'
 describe JourneyLog do
   let(:station) { double (:station) }
 
+  it 'has an empty list of journeys by default' do
+    expect(subject.journeys).to be_empty
+  end
+
   describe '#start' do
     it 'starts a journey' do
       expect(subject.start(station)).to eq station

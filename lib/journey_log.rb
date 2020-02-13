@@ -1,4 +1,9 @@
 class JourneyLog
+  attr_reader :journeys
+
+  def initialize
+    @journeys = {}
+  end
 
   def start(station)
     @entry_station = station
