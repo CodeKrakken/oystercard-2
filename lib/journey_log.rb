@@ -11,7 +11,9 @@ class JourneyLog
   end
 
   def finish(station)
-    @finish_station = station
+    @journey = Journey.new unless @journey
+    @journey.finish(station)
+    station
   end
 
   def entry_station
@@ -19,7 +21,7 @@ class JourneyLog
   end
 
   def finish_station
-    @finish_station
+    @journey.exit_station
   end
 
 end
