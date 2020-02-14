@@ -30,6 +30,14 @@ describe Journey do
         expect(subject.fare(1, 1)).to eq 1
       end
 
+      it 'calculates a fare from zone 1 to 2' do
+        expect(subject.fare(1, 2)).to eq 2
+      end
+
+      it 'calculates a fare from zone 200 to zone 3' do
+        expect(subject.fare(200, 3)).to eq 198
+      end
+
       it 'knows if a journey is complete' do
         expect(subject).to be_complete
       end

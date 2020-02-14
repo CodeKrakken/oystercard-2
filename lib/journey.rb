@@ -10,12 +10,12 @@ class Journey
   end
 
   def complete?
-    !!@exit_station
+    @entry_station && @exit_station
   end
 
   def fare(entry_zone, exit_zone)
-    PENALTY_FARE unless @entry_station && @exit_station
-    return 1 if !!@entry_station && !!@exit_station
+    PENALTY_FARE unless complete?
+    (entry_zone.abs - exit_zone).abs + 1
   end
 
   def finish(station)
