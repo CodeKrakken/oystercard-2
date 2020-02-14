@@ -28,5 +28,4 @@ class JourneyLog
       return journey
     end
   end
-
 end
