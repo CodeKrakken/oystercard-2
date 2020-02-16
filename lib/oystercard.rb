@@ -1,4 +1,6 @@
 require_relative 'station'
+require_relative 'journey'
+require_relative 'journey_log'
 
 class Oystercard
 
@@ -6,9 +8,11 @@ class Oystercard
   MINIMUM_BALANCE = 1
 
   attr_reader :balance
+  attr_reader :journey_log
 
-  def initialize
+  def initialize(journey_log_class)
     @balance = 0
+    @journey_log = journey_log_class
   end
 
   def top_up(amount)
