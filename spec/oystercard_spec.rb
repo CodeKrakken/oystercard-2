@@ -39,6 +39,10 @@ describe Oystercard do
       expect { subject.top_up 11 }.to raise_error "Maximum balance of #{Oystercard::MAXIMUM_BALANCE} exceeded"
     end
 
+    it 'deducts a minimum fare on touch out' do
+      expect { subject.touch_out(exit_station)}.to change { subject.balance }.by -1
+    end
+
   end
 end
 end
