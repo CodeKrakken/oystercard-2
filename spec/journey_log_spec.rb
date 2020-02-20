@@ -2,6 +2,7 @@ require 'journey_log'
 
 describe JourneyLog do
   let(:station) { double (:station) }
+  let(:zone_3_station) { double (:zone_3_station) }
   let(:journey_class) { double (:journey_class) }
   subject(:journey_log) { described_class.new(journey_class) }
 
@@ -54,6 +55,13 @@ describe JourneyLog do
     it 'returns a list of journeys' do
       subject.finish(station)
       expect(subject.retrieve).to be_a_kind_of(Array)
+    end
+  end
+
+  describe '#fare' do
+    it 'retrieves the correct fare from journey class' do
+      allow(subject.journey).to receive(:fare).and_return(3)
+      expect(subject.fare).to eq(3)
     end
   end
 end

@@ -1,6 +1,7 @@
 class JourneyLog
   attr_reader :journeys
   attr_reader :current_journey
+  attr_reader :journey
 
   def initialize(journey_class)
     @journey_class = journey_class
@@ -34,10 +35,6 @@ class JourneyLog
 
   def retrieve
     @journeys
-  end
-
-  def complete?
-    @current_journey.complete?
   end
 
   private

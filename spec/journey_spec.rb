@@ -14,16 +14,19 @@ describe Journey do
     expect(subject.finish(zone_1_station)).to eq(subject)
   end
 
-  context 'given a zone 1 entry station' do
-    subject {described_class.new(zone_1_station)}
+  it 'has an entry station' do
+    expect(subject.start(zone_1_station)).to eq zone_1_station
+  end
 
-    it 'has an entry station' do
-      expect(subject.entry_station).to eq zone_1_station
-    end
+  it 'knows if a journey is complete' do
+    subject.start(zone_1_station)
+    subject.finish(zone_1_station)
+    expect(subject).to be_complete
+  end
 
-    it 'knows if a journey is complete' do
-      subject.finish(zone_1_station)
-      expect(subject).to be_complete
-    end
+  it 'calculates the correct fare from zone 1 to zone 3' do
+    subject.start(zone_1_station)
+    subject.finish(zone_3_station)
+    expect(subject.fare).to eq 3
   end
 end
