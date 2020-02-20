@@ -5,15 +5,18 @@ describe JourneyLog do
   let(:journey_class) { double (:journey) }
   subject(:journey_log) { described_class.new(journey_class) }
 
+  before :each do
+    allow(journey_class).to receive(:start).and_return(station)
+    allow(journey_class).to receive(:entry_station).and_return(station)
+    allow(journey_class).to receive(:fare)
+    allow(journey_log).to receive(:fare)
+  end
+
   it 'has an empty list of journeys by default' do
     expect(subject.journeys).to be_empty
   end
 
   describe '#start' do
-  before :each do
-    allow(journey_class).to receive(:start).and_return(station)
-    allow(journey_class).to receive(:entry_station).and_return(station)
-  end
 
     it 'starts a journey' do
       expect(subject.start(station)).to eq station

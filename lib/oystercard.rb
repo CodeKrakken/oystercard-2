@@ -6,14 +6,13 @@ class Oystercard
 
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
-  PENALTY_FARE = 6
 
   attr_reader :balance
   attr_reader :journey_log
 
-  def initialize(journey_log_class)
+  def initialize(journey_log_class, journey_class)
     @balance = 0
-    @journey_log = journey_log_class
+    @journey_log = journey_log_class.new(journey_class)
   end
 
   def top_up(amount)
@@ -23,14 +22,12 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds to touch in" if balance < MINIMUM_BALANCE
+    @journey_log.start(station)
   end
 
   def touch_out(station)
-    deduct(fare)
-  end
-
-  def fare
-    @journey_log.complete? ? (entry_station.zone.abs - exit_station.zone).abs + 1 : PENALTY_FARE
+    @journey_log.finish(station)
+    deduct(@journey_log.fare)
   end
 
   def deduct(amount)
