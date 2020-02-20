@@ -7,14 +7,16 @@ describe Oystercard do
   let(:zone_2_station) { double :zone_2_station }
   let(:zone_3_station) { double :zone_3_station }
   let(:journey_log_class) { double :journey_log_class }
-  subject(:oystercard) { described_class.new(journey_log_class) }
+  let(:journey_class) { double :journey_class }
+  subject(:oystercard) { described_class.new(journey_log_class, journey_class) }
 
   before :each do
     allow(journey_log_class).to receive(:new)
     allow(journey_log_class).to receive(:finish)
-    allow(journey_log_class).to receive(:fare).and_return(6)
     allow(journey_log_class).to receive(:start)
-    allow(journey_log_class).to receive(:exist?).and_return(true)
+    allow(subject.journey_log).to receive(:exist?).and_return(true)
+    allow(subject.journey_log).to receive(:start)
+    allow(subject.journey_log).to receive(:finish)
     allow(journey_log_class).to receive(:journey)
   end
 
@@ -46,6 +48,7 @@ describe Oystercard do
 
     it 'charges a penalty fare when given no entry station' do
       allow(journey_log_class).to receive(:complete?).and_return(false)
+      allow(subject.journey_log).to receive(:fare).and_return(6)
       expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -6
     end     
 
@@ -57,10 +60,12 @@ describe Oystercard do
 
       it 'deducts a fare from zone 1 to 1' do
         allow(journey_log_class).to receive(:complete?).and_return(true)
+        allow(subject.journey_log).to receive(:fare).and_return(1)
         expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -1
       end
 
       it 'deducts a fare from zone 1 to 2' do
+        allow(subject.journey_log).to receive(:fare).and_return(2)
         expect { subject.touch_out(zone_2_station) }.to change { subject.balance }.by -2
       end
     end
@@ -68,6 +73,7 @@ describe Oystercard do
       context 'Touched in zone 3' do
 
         it 'deducts a fare from zone 3 to zone 1' do
+          allow(subject.journey_log).to receive(:fare).and_return(3)
           subject.touch_in(zone_3_station)
           expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -3
         end

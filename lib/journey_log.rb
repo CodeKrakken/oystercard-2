@@ -10,6 +10,7 @@ class JourneyLog
   def start(station)
     clear_current_journey
     @current_journey.start(station)
+    station
   end
 
   def finish(station)
@@ -27,14 +28,12 @@ class JourneyLog
     @current_journey.entry_station
   end
 
-  def finish_station
+  def exit_station
     @current_journey.exit_station
   end
 
   def retrieve
-    @journeys.dup.each do |journey|
-      return journey
-    end
+    @journeys
   end
 
   def complete?
