@@ -6,6 +6,7 @@ class Oystercard
 
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
+  PENALTY_FARE = 6
 
   attr_reader :balance
   attr_reader :journey_log
@@ -25,7 +26,11 @@ class Oystercard
   end
 
   def touch_out(station)
-    deduct(MINIMUM_BALANCE)
+    deduct(fare)
+  end
+
+  def fare
+    @journey_log.complete? ? (entry_station.zone.abs - exit_station.zone).abs + 1 : PENALTY_FARE
   end
 
   def deduct(amount)

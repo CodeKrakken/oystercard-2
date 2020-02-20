@@ -22,30 +22,6 @@ describe Journey do
       expect(subject.entry_station).to eq zone_1_station
     end
 
-    it 'charges a penalty fare when given no exit station' do
-      expect(subject.fare).to eq 6
-    end      
-
-    it 'calculates a fare from zone 1 to 1' do
-      subject.finish(zone_1_station)
-      expect(subject.fare).to eq 1
-    end
-
-    it 'calculates a fare from zone 1 to 2' do
-      subject.finish(zone_2_station)
-      expect(subject.fare).to eq 2
-    end
-    
-  end
-
-  context 'given a zone 3 entry station' do
-    subject {described_class.new(zone_3_station)}
-
-    it 'calculates a fare from zone 3 to zone 1' do
-      subject.finish(zone_1_station)
-      expect(subject.fare).to eq 3
-    end
-
     it 'knows if a journey is complete' do
       subject.finish(zone_1_station)
       expect(subject).to be_complete
