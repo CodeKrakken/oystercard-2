@@ -28,16 +28,16 @@ describe Oystercard do
     expect { subject.touch_in(zone_1_station) }.to raise_error "Insufficient funds to touch in"
   end
 
+  it 'can top up the balance' do
+    expect { subject.top_up 1}.to change { subject.balance }.by 1
+  end
+
     context 'Topped up' do
 
       before :each do
         subject.top_up(Oystercard::MAXIMUM_BALANCE-10)
         allow(subject.journey_log).to receive(:start)
         allow(subject.journey_log).to receive(:finish)
-      end
-
-      it 'can top up the balance' do
-        expect { subject.top_up 1}.to change { subject.balance }.by 1
       end
 
       it 'raises an error if the maximum balance is exceeded' do
