@@ -15,6 +15,9 @@ oystercard.top_up(Oystercard::MAXIMUM_BALANCE)
 oystercard.balance
 oystercard.top_up(1)
 oystercard.touch_in(brockley)
+oystercard
+oystercard.touch_in(brockley)
+oystercard
 oystercard.touch_out(shoreditch)
 oystercard.touch_in(shoreditch)
 oystercard.touch_out(anerley)
