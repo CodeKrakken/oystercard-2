@@ -46,6 +46,7 @@ describe Oystercard do
 
       it 'deducts the correct fare' do
         allow(subject.journey_log).to receive(:fare).and_return(1)
+        allow(subject.journey_log).to receive(:current_journey)
         subject.touch_in(zone_1_station)
         expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -1
       end

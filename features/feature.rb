@@ -21,6 +21,5 @@ oystercard
 oystercard.touch_out(shoreditch)
 oystercard.touch_in(shoreditch)
 oystercard.touch_out(anerley)
-oystercard.journey_log.current_journey
 oystercard.touch_out(brockley)
 oystercard.journey_log.retrieve
