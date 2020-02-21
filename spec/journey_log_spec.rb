@@ -1,19 +1,18 @@
 require 'journey_log'
 
 describe JourneyLog do
-  let(:station) { double (:station) }
+  let(:zone_1_station) { double (:zone_1_station) }
   let(:zone_3_station) { double (:zone_3_station) }
   let(:journey_class) { double (:journey_class) }
   subject(:journey_log) { described_class.new(journey_class) }
 
   before :each do
     allow(journey_class).to receive(:new)
-    allow(journey_class).to receive(:start).and_return(station)
-    allow(journey_class).to receive(:fare)
-    allow(journey_log).to receive(:fare)
+    # allow(journey_class).to receive(:start).and_return(zone_1_station)
+    # allow(journey_class).to receive(:fare)
     allow(subject.current_journey).to receive(:start)
-    allow(subject.current_journey).to receive(:entry_station).and_return(station)
-    allow(subject.current_journey).to receive(:exit_station).and_return(station)
+    allow(subject.current_journey).to receive(:entry_station).and_return(zone_1_station)
+    allow(subject.current_journey).to receive(:exit_station).and_return(zone_1_station)
     allow(subject.current_journey).to receive(:finish)
     allow(subject.current_journey).to receive(:exit_station)
   end
@@ -25,12 +24,12 @@ describe JourneyLog do
   describe '#start' do
 
     it 'starts a journey' do
-      expect(subject.start(station)).to eq station
+      expect(subject.start(zone_1_station)).to eq zone_1_station
     end
 
     it 'stores the entry station' do
-      subject.start(station)
-      expect(subject.entry_station).to eq station
+      subject.start(zone_1_station)
+      expect(subject.entry_station).to eq zone_1_station
     end
   end
 
@@ -38,12 +37,12 @@ describe JourneyLog do
   
   before :each do
     allow(subject.current_journey).to receive(:finish)
-    allow(subject.current_journey).to receive(:exit_station).and_return(station)
-    subject.finish(station)
+    allow(subject.current_journey).to receive(:exit_station).and_return(zone_3_station)
+    subject.finish(zone_3_station)
   end
 
     it 'stores the exit station' do
-      expect(subject.exit_station).to eq station
+      expect(subject.exit_station).to eq zone_3_station
     end
 
     it 'stores the journey' do
@@ -53,7 +52,7 @@ describe JourneyLog do
 
   describe '#retrieve' do
     it 'returns a list of journeys' do
-      subject.finish(station)
+      subject.finish(zone_3_station)
       expect(subject.retrieve).to be_a_kind_of(Array)
     end
   end
@@ -61,6 +60,8 @@ describe JourneyLog do
   describe '#fare' do
     it 'retrieves the correct fare from journey class' do
       allow(subject.journey).to receive(:fare).and_return(3)
+      subject.start(zone_1_station)
+      subject.finish(zone_3_station)
       expect(subject.fare).to eq(3)
     end
   end
