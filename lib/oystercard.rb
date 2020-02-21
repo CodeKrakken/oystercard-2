@@ -18,6 +18,7 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds to touch in" if balance < MINIMUM_BALANCE
+    deduct(@journey_log.fare)
     @journey_log.start(station)
   end
 

@@ -45,9 +45,14 @@ describe Oystercard do
       end    
 
       it 'deducts the correct fare' do
-        subject.touch_in(zone_1_station)
         allow(subject.journey_log).to receive(:fare).and_return(1)
+        subject.touch_in(zone_1_station)
         expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -1
+      end
+
+      it 'deducts a penalty fare upon touch in if previous journey not touched out' do
+        allow(subject.journey_log).to receive(:fare).and_return(6)
+        expect { subject.touch_in(zone_1_station) }.to change { subject.balance }.by -6
       end
     end
   end
