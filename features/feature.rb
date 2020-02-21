@@ -1,4 +1,7 @@
 require './lib/oystercard.rb'
+require './lib/station'
+require './lib/journey'
+require './lib/journey_log'
 oystercard = Oystercard.new(JourneyLog, Journey)
 brockley = Station.new('Brockley', 2)
 shoreditch = Station.new('Shoreditch', 2)
@@ -17,3 +20,4 @@ oystercard.touch_in(shoreditch)
 oystercard.touch_out(anerley)
 oystercard.journey_log.current_journey
 oystercard.touch_out(brockley)
+oystercard.journey_log.retrieve
