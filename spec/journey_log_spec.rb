@@ -18,6 +18,7 @@ describe JourneyLog do
   describe '#start' do
 
     it 'starts a journey' do
+      allow(subject.current_journey).to receive(:start).and_return(zone_1_station)
       expect(subject.start(zone_1_station)).to eq zone_1_station
     end
 

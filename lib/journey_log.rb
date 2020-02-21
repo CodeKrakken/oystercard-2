@@ -11,7 +11,6 @@ class JourneyLog
   def start(station)
     clear_current_journey
     @current_journey.start(station)
-    station
   end
 
   def finish(station)
@@ -34,7 +33,7 @@ class JourneyLog
   end
 
   def retrieve
-    @journeys
+    @journeys.dup
   end
 
   private
