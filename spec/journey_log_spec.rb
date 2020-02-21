@@ -8,13 +8,7 @@ describe JourneyLog do
 
   before :each do
     allow(journey_class).to receive(:new)
-    # allow(journey_class).to receive(:start).and_return(zone_1_station)
-    # allow(journey_class).to receive(:fare)
     allow(subject.current_journey).to receive(:start)
-    allow(subject.current_journey).to receive(:entry_station).and_return(zone_1_station)
-    allow(subject.current_journey).to receive(:exit_station).and_return(zone_1_station)
-    allow(subject.current_journey).to receive(:finish)
-    allow(subject.current_journey).to receive(:exit_station)
   end
 
   it 'has an empty list of journeys by default' do
@@ -28,7 +22,7 @@ describe JourneyLog do
     end
 
     it 'stores the entry station' do
-      subject.start(zone_1_station)
+      allow(subject.current_journey).to receive(:entry_station).and_return(zone_1_station)
       expect(subject.entry_station).to eq zone_1_station
     end
   end
@@ -36,8 +30,8 @@ describe JourneyLog do
   describe '#finish' do
   
   before :each do
-    allow(subject.current_journey).to receive(:finish)
     allow(subject.current_journey).to receive(:exit_station).and_return(zone_3_station)
+    allow(subject.current_journey).to receive(:finish)
     subject.finish(zone_3_station)
   end
 
@@ -52,7 +46,6 @@ describe JourneyLog do
 
   describe '#retrieve' do
     it 'returns a list of journeys' do
-      subject.finish(zone_3_station)
       expect(subject.retrieve).to be_a_kind_of(Array)
     end
   end
@@ -61,7 +54,6 @@ describe JourneyLog do
     it 'retrieves the correct fare from journey class' do
       allow(subject.journey).to receive(:fare).and_return(3)
       subject.start(zone_1_station)
-      subject.finish(zone_3_station)
       expect(subject.fare).to eq(3)
     end
   end
