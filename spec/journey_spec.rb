@@ -23,6 +23,10 @@ describe Journey do
       expect(subject.entry_station).to eq zone_1_station
     end
 
+    it 'charges a penalty fare upon touch in if failed to touch out previous journey' do
+      expect(subject.fare).to eq 6
+    end
+
     it 'returns itself when exiting a journey' do
       expect(subject.finish(zone_1_station)).to eq(subject)
     end
