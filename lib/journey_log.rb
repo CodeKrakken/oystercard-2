@@ -36,6 +36,10 @@ class JourneyLog
     @journeys.dup
   end
 
+  def complete?
+    @current_journey.nil? || @current_journey.complete?
+  end
+
   private
 
   def clear_current_journey

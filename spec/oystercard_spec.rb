@@ -35,13 +35,14 @@ describe Oystercard do
     context 'Topped up' do
 
       before :each do
-        subject.top_up(Oystercard::MAXIMUM_BALANCE-10)
+        subject.top_up(Oystercard::MAXIMUM_BALANCE)
         allow(subject.journey_log).to receive(:start)
         allow(subject.journey_log).to receive(:finish)
+        allow(subject.journey_log).to receive(:complete?).and_return(true)
       end
 
       it 'raises an error if the maximum balance is exceeded' do
-        expect { subject.top_up 11 }.to raise_error "Maximum balance of #{Oystercard::MAXIMUM_BALANCE} exceeded"
+        expect { subject.top_up 1 }.to raise_error "Maximum balance of #{Oystercard::MAXIMUM_BALANCE} exceeded"
       end    
 
       it 'deducts the correct fare' do
@@ -52,7 +53,6 @@ describe Oystercard do
       end
 
       it 'deducts a penalty fare upon touch in if previous journey not touched out' do
-        allow(subject.journey_log).to receive(:fare).and_return(6)
         expect { subject.touch_in(zone_1_station) }.to change { subject.balance }.by -6
       end
     end
