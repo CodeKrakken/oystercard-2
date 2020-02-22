@@ -3,8 +3,6 @@ require 'oystercard'
 describe Oystercard do
 
   let(:zone_1_station) { double :zone_1_station }
-  let(:zone_2_station) { double :zone_2_station }
-  let(:zone_3_station) { double :zone_3_station }
   let(:journey_log_class) { double :journey_log_class }
   let(:journey_class) { double :journey_class }
   subject(:oystercard) { described_class.new(journey_log_class, journey_class) }
