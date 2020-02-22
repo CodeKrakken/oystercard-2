@@ -1,9 +1,12 @@
 # Oystercard
 
+---
 The world's your oyster! What a card. A second version of the Makers classic, carried through to completion in the wake of Demo Day.
 
+---
 ## User stories
 
+---
 ```
 In order to use public transport
 As a customer
@@ -54,16 +57,18 @@ As a customer
 I need to have the correct fare calculated
 ```
 
+---
 ## Setup
 
+---
 You will need Ruby 2.7.0. To get it, visit https://www.ruby-lang.org/en/downloads/
 
-To install the project:
+To install the project: `git clone https://github.com/CodeKrakken/oystercard-2.git`
 
-* `git clone https://github.com/CodeKrakken/oystercard-2.git`
-
+---
 ## Usage
 
+---
 * Run `rspec` in the parent folder to run the unit tests
 * Run `irb './features/feature.rb'` to run the feature test
 * To explore the programme, run
@@ -72,6 +77,8 @@ irb
 require './features/feature'
 ```
 
-Feature Test example:
+---
+## Screenshot
 
+---
 <img width="1280" alt="Screenshot 2020-02-22 at 18 30 01" src="https://user-images.githubusercontent.com/52076323/75097554-ef3cf080-55a3-11ea-826b-03ce8b428d8e.png">
