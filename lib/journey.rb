@@ -2,6 +2,10 @@ class Journey
 
   PENALTY_FARE = 6
 
+  def penalty_fare
+    PENALTY_FARE
+  end
+
   def start(station)
     @entry_station = station
   end

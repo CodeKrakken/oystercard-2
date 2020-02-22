@@ -38,7 +38,6 @@ describe Oystercard do
         subject.top_up(Oystercard::MAXIMUM_BALANCE)
         allow(subject.journey_log).to receive(:start)
         allow(subject.journey_log).to receive(:finish)
-        allow(subject.journey_log).to receive(:complete?).and_return(true)
       end
 
       it 'raises an error if the maximum balance is exceeded' do
@@ -48,11 +47,14 @@ describe Oystercard do
       it 'deducts the correct fare' do
         allow(subject.journey_log).to receive(:fare).and_return(1)
         allow(subject.journey_log).to receive(:current_journey)
+        allow(subject.journey_log).to receive(:complete?).and_return(true)
         subject.touch_in(zone_1_station)
         expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -1
       end
 
       it 'deducts a penalty fare upon touch in if previous journey not touched out' do
+        allow(subject.journey_log).to receive(:complete?).and_return(false)
+        subject.touch_in(zone_1_station)
         expect { subject.touch_in(zone_1_station) }.to change { subject.balance }.by -6
       end
     end
