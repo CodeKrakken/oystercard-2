@@ -21,7 +21,7 @@ class JourneyLog
   end
 
   def fare
-    @journeys[-1].fare
+    complete? ? @journeys[-1].fare : @current_journey.fare
   end
 
   def entry_station

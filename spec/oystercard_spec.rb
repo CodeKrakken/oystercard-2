@@ -12,6 +12,7 @@ describe Oystercard do
   context 'Initialized' do
 
   before :each do
+    allow(journey_class).to receive(:new)
     allow(journey_log_class).to receive(:new)
   end
 
@@ -54,6 +55,7 @@ describe Oystercard do
 
       it 'deducts a penalty fare upon touch in if previous journey not touched out' do
         allow(subject.journey_log).to receive(:complete?).and_return(false)
+        allow(subject.journey).to receive(:penalty_fare).and_return(6)
         subject.touch_in(zone_1_station)
         expect { subject.touch_in(zone_1_station) }.to change { subject.balance }.by -6
       end
