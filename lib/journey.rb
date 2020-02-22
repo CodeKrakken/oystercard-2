@@ -3,7 +3,7 @@ class Journey
   attr_reader :penalty_fare
   
   PENALTY_FARE = 6
-  
+
   def initialize
     @penalty_fare = PENALTY_FARE
   end
