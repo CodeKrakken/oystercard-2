@@ -2,7 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
 
-  let(:zone_1_station) { double :zone_1_station }
+  let(:station) { double :station }
   let(:journey_log_class) { double :journey_log_class }
   let(:journey_class) { double :journey_class }
   subject(:oystercard) { described_class.new(journey_log_class, journey_class) }
@@ -24,7 +24,7 @@ describe Oystercard do
   end
 
   it 'will not touch in if insufficient funds' do
-    expect { subject.touch_in(zone_1_station) }.to raise_error "Insufficient funds to touch in"
+    expect { subject.touch_in(station) }.to raise_error "Insufficient funds to touch in"
   end
 
   it 'can top up the balance' do
@@ -47,15 +47,15 @@ describe Oystercard do
         allow(subject.journey_log).to receive(:fare).and_return(1)
         allow(subject.journey_log).to receive(:current_journey)
         allow(subject.journey_log).to receive(:complete?).and_return(true)
-        subject.touch_in(zone_1_station)
-        expect { subject.touch_out(zone_1_station) }.to change { subject.balance }.by -1
+        subject.touch_in(station)
+        expect { subject.touch_out(station) }.to change { subject.balance }.by -1
       end
 
       it 'deducts a penalty fare upon touch in if previous journey not touched out' do
         allow(subject.journey_log).to receive(:complete?).and_return(false)
         allow(subject.journey).to receive(:penalty_fare).and_return(6)
-        subject.touch_in(zone_1_station)
-        expect { subject.touch_in(zone_1_station) }.to change { subject.balance }.by -6
+        subject.touch_in(station)
+        expect { subject.touch_in(station) }.to change { subject.balance }.by -6
       end
     end
   end
