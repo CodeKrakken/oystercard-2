@@ -9,8 +9,7 @@ class Oystercard
 
   def initialize(journey_log_class, journey_class)
     @balance = 0
-    @journey_class = journey_class
-    @journey = journey_class.new
+    @journey_class = journey_class.new
     @journey_log = journey_log_class.new(journey_class)
   end
 
@@ -21,7 +20,7 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds to touch in" if balance < MINIMUM_BALANCE
-    deduct(@journey.penalty_fare) unless @journey_log.complete?
+    deduct(@journey_class.penalty_fare) unless @journey_log.complete?
     @journey_log.start(station)
   end
 
@@ -29,6 +28,8 @@ class Oystercard
     @journey_log.finish(station)
     deduct(@journey_log.fare)
   end
+
+  private
 
   def deduct(amount)
     @balance -= amount
