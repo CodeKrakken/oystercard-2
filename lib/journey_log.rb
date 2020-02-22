@@ -1,4 +1,5 @@
 class JourneyLog
+
   attr_reader :journeys
   attr_reader :current_journey
   attr_reader :journey
@@ -20,10 +21,6 @@ class JourneyLog
     clear_current_journey
   end
 
-  def fare
-    complete? ? @journeys[-1].fare : @current_journey.fare
-  end
-
   def entry_station
     @current_journey.entry_station
   end
@@ -32,12 +29,16 @@ class JourneyLog
     @current_journey.exit_station
   end
 
-  def retrieve
-    @journeys.dup
-  end
-
   def complete?
     @current_journey.nil? || @current_journey.complete?
+  end
+
+  def fare
+    complete? ? @journeys[-1].fare : @current_journey.fare
+  end
+
+  def retrieve
+    @journeys.dup
   end
 
   private
