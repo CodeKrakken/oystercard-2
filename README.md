@@ -65,8 +65,8 @@ To install the project: `git clone https://github.com/CodeKrakken/oystercard-2.g
 ---
 ## Usage
 
-* Run `rspec` in the parent folder to run the unit tests
-* Run `irb './features/feature.rb'` to run the feature test
+* Run `rspec` in the parent folder for the unit tests
+* Run `irb './features/feature.rb'` in the parent folder for the feature test
 * To explore the programme, run
 ```
 irb
