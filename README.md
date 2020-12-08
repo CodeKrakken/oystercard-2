@@ -1,6 +1,6 @@
 # Oystercard
 
-The world's your oyster! What a card. A second version of the Makers classic, carried through to completion in the wake of Demo Day.
+The world's your oyster! What a card. A second version of the Makers classic, carried through to completion. See my original version [here](https://github.com/CodeKrakken/oystercard).
 
 ---
 ## User stories
